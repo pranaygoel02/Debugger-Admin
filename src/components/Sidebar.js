@@ -16,15 +16,15 @@ function Sidebar() {
         try{
             const res = await axios.get('/round/all')
             setRounds(res.data.rounds)
-            console.log(res.data);
+            // console.log(res.data);
         }
         catch(err){
-            console.log(err);
+            // console.log(err);
         }
     }
 
     useEffect(() => {
-        console.log(rounds)
+        // console.log(rounds)
         getRoutes()
     },[])
 
@@ -38,14 +38,14 @@ function Sidebar() {
     const handleAddRound = async (e) => {
         e.preventDefault()
         setAdding(true)
-        console.log(e.target[0].value);
+        // console.log(e.target[0].value);
         try{
             const res = await axios.post('/round/add',{name:e.target[0].value})
-            console.log(res.data);
+            // console.log(res.data);
             setRounds([...rounds,res.data.round])
         }
         catch(err){
-            console.log(err);
+            // console.log(err);
         }
         setAdding(false)
         setShowAddRound(false)

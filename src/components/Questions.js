@@ -28,13 +28,13 @@ function Questions() {
     const getQuestions = async () => {
         try{
             const res = await axios.get(`/question/${id}`)
-            console.log(res.data);
+            // // console.log(res.data);
             if(res.data.success){
                 setQuestions(res.data.questions)
             }
         }
         catch(err){
-            console.log(err);
+            // // console.log(err);
         }
     }
     
@@ -44,10 +44,10 @@ function Questions() {
 
 
     const handleDeleteRound = async () => {
-        console.log('delete round');
+        // // console.log('delete round');
         try{
             const res = await axios.post(`/round/delete`,{id})
-            console.log(res.data.success);
+            // // console.log(res.data.success);
             if( res.data.success) {
                 setRounds(rounds.filter(round => round._id !== id))
                 setShowDelete(false)
@@ -55,17 +55,17 @@ function Questions() {
             }
         }
         catch(err){
-            console.log(err);
+            // // console.log(err);
         }
     }
     
     const handleEditRound = async (e) => {
         e.preventDefault()
-        console.log('edit round');
+        // console.log('edit round');
         try{
             const res = await axios.post(`/round/edit`,{id,name: e.target[0].value})
-            console.log(res.data);
-            console.log(res.data.success);
+            // console.log(res.data);
+            // console.log(res.data.success);
             if( res.data.success) {
                 setRounds(prev => prev.map(round => round._id === id ? {...round,name: e.target[0].value} : round))
                 setShowEdit(false)
@@ -73,18 +73,18 @@ function Questions() {
             }
         }
         catch(err){
-            console.log(err);
+            // console.log(err);
         }
     }
 
 
     const addQuestionHandler = async (e) => {
         e.preventDefault()
-        console.log('add question');
-        console.log({round: id,title,code,options: options.split(','),answer: answer === '' ? options.split(',')[0] : answer});
+        // console.log('add question');
+        // console.log({round: id,title,code,options: options.split(','),answer: answer === '' ? options.split(',')[0] : answer});
         try{
             const res = await axios.post(`/question/add`,{round: id,title,code,options: options.split(','),answer: answer === '' ? options.split(',')[0] : answer})
-            console.log(res.data);
+            // console.log(res.data);
             if( res.data.success) {
                 setQuestions(prev => [...prev,res.data.newQuestion])
                 setAddQues(false)
@@ -95,7 +95,7 @@ function Questions() {
             }
         }
         catch(err){
-            console.log(err);
+            // console.log(err);
         }
     }
 

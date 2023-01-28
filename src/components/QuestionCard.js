@@ -21,16 +21,16 @@ function QuestionCard({question,index, setQuestions}) {
       }
 
       useEffect(() => {  
-        console.log('useEffect convertToCode');
+        // // console.log('useEffect convertToCode');
         convertToCode()
         },[])
 
     const editQuestionHandler = async (e) => {
         e.preventDefault()
-        console.log('options: ',options.split(','));
+        // // console.log('options: ',options.split(','));
         try{
             const res = await axios.post(`/question/edit`,{id: question._id, title, code, options: options.split(','), answer})
-            console.log(res.data.updatedQuestion);
+            // // console.log(res.data.updatedQuestion);
             if( res.data.success) {
                 setShowEdit(false)
                 setQuestions(prev => prev.map(ques => ques._id === question._id ? {...ques, ...res.data.updatedQuestion} : ques))
@@ -38,23 +38,23 @@ function QuestionCard({question,index, setQuestions}) {
             }
         }
         catch(err){
-            console.log(err);
+            // // console.log(err);
         }
     }
     
 
     const handleDeleteQuestion = async () => {
-        console.log('delete question');
+        // // console.log('delete question');
         try{
             const res = await axios.post(`/question/delete`,{id: question._id})
-            console.log(res.data.success);
+            // // console.log(res.data.success);
             if( res.data.success) {
                 setShowDelete(false)
                 setQuestions(prev => prev.filter(ques => ques._id !== question._id))
             }
         }
         catch(err){
-            console.log(err);
+            // // console.log(err);
         }
     }
 

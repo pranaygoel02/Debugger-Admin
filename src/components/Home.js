@@ -7,7 +7,7 @@ function Home() {
     const {user,setUser} = useUser()
     const navigate = useNavigate()
     useEffect(() => {
-        console.log('user: ', user);
+        // // console.log('user: ', user);
         if(user === null){
             navigate('/login')
         }
