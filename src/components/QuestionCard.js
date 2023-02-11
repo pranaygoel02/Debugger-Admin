@@ -29,7 +29,7 @@ function QuestionCard({question,index, setQuestions}) {
         e.preventDefault()
         // // console.log('options: ',options.split(','));
         try{
-            const res = await axios.post(`/question/edit`,{id: question._id, title, code, options: options.split(','), answer})
+            const res = await axios.post(`/question/edit`,{id: question._id, title, code, options: options.split(';'), answer})
             // // console.log(res.data.updatedQuestion);
             if( res.data.success) {
                 setShowEdit(false)

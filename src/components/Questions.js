@@ -83,7 +83,7 @@ function Questions() {
         // console.log('add question');
         // console.log({round: id,title,code,options: options.split(','),answer: answer === '' ? options.split(',')[0] : answer});
         try{
-            const res = await axios.post(`/question/add`,{round: id,title,code,options: options.split(','),answer: answer === '' ? options.split(',')[0] : answer})
+            const res = await axios.post(`/question/add`,{round: id,title,code,options: options.split(';'),answer: answer === '' ? options.split(';')[0] : answer})
             // console.log(res.data);
             if( res.data.success) {
                 setQuestions(prev => [...prev,res.data.newQuestion])
