@@ -118,7 +118,7 @@ function QuestionCard({question,index, setQuestions}) {
             <div className='flex flex-col gap-1'>
                 <label htmlFor='answer'>Correct Option</label>
                 <select required defaultValue={answer} onChange={(e)=>setAnswer(e.target.value)} className='p-2 bg-gray-200' name="answer" id="answer">
-                    {options &&  options.split(',').map((option,index) => <option key={index} value={option}>{option}</option>)}
+                    {options &&  options.split(';').map((option,index) => <option key={index} value={option}>{option}</option>)}
                 </select>
             </div>
             <button onSubmit={editQuestionHandler} type='submit' className='p-2 bg-blue-600 text-white rounded'>Update Question</button>
