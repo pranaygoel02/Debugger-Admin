@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import showdown from 'showdown'
 import axios from '../axios/axiosInstance'
 
-function QuestionCard({question,index, setQuestions}) {
+function QuestionCard({question,index, setQuestions,addDownloadQuestion, removeDownloadQuestion}) {
 
     const [showDelete,setShowDelete] = useState(false)
     const [showEdit, setShowEdit] = useState(false)
@@ -66,6 +66,7 @@ function QuestionCard({question,index, setQuestions}) {
         <div className='flex justify-between relative'>
             <h2 className='font-bold'>{index + 1}. {question?.title}</h2>
             <div className='absolute top-0 right-0 flex gap-2'>
+            <input onChange={(e) => e.target.checked ? addDownloadQuestion(question) : removeDownloadQuestion(question)} type={'checkbox'}/>
             <button onClick={()=>{
             setShowEdit(!showEdit)
             setShowDelete(false)

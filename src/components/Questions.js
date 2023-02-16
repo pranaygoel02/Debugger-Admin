@@ -14,6 +14,8 @@ function Questions() {
     const [addQues,setAddQues]  = useState(false)
     
     const [questions,setQuestions] = useState(null)
+    const [downloadQues,setDownloadQues] = useState([])
+    const [downloadQuesData,setDownloadQuesData] = useState([])
 
     const downloadData = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(questions));
 
@@ -77,6 +79,17 @@ function Questions() {
         }
     }
 
+    const addDownloadQuestion = (question) => {
+        setDownloadQues(prev => [...prev,question])
+    }
+
+    const removeDownloadQuestion = (question) => {
+        setDownloadQues(prev => prev.filter(item => item._id !== question._id))
+    }
+
+    useEffect(()=>{
+        setDownloadQuesData("text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(downloadQues)));
+    },[downloadQues])
 
     const addQuestionHandler = async (e) => {
         e.preventDefault()
@@ -106,7 +119,8 @@ function Questions() {
         <div className='w-full flex items-center justify-between'>
         <h1 className='font-bold text-xl'>{name} Questions</h1>
         <div className='flex gap-4 relative'>
-        <a href={'data:' + downloadData} download={`${name}.json`} title='Download' className='p-2 border border-blue-600 text-black rounded hover:bg-blue-600 hover:text-white transition-all'>Download JSON</a>
+        <a href={'data:' + downloadData} download={`${name}.json`} title='Download' className='p-2 border border-blue-600 text-black rounded hover:bg-blue-600 hover:text-white transition-all'>Download All Questions</a>
+        <a href={'data:' + downloadQuesData} download={`${name}.json`} title='Download' className='p-2 border border-blue-600 text-black rounded hover:bg-blue-600 hover:text-white transition-all'>Download Selected Questions</a>
         <button onClick={()=>{
             setShowEdit(!showEdit)
             setShowDelete(false)
@@ -151,7 +165,7 @@ function Questions() {
                 <button onSubmit={addQuestionHandler} type='submit' className='p-2 bg-blue-600 text-white rounded'>Add Question</button>
             </form>
         }
-        {questions?.length > 0 ? questions.map((question,index) => <QuestionCard setQuestions={setQuestions} index={index} question={question} />) : <p>No Questions Found</p>}
+        {questions?.length > 0 ? questions.map((question,index) => <QuestionCard addDownloadQuestion={addDownloadQuestion} removeDownloadQuestion={removeDownloadQuestion} setQuestions={setQuestions} index={index} question={question} />) : <p>No Questions Found</p>}
         </div>
         <Footer/>
     </div>
